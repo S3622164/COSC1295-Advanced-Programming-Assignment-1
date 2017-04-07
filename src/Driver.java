@@ -5,7 +5,8 @@ public class Driver {
 	public Database db=new Database();	
 	static Ozlympics oz=new Ozlympics();
 	static String n1=null,n2=null,n3=null;
-	
+	static char gametype;
+	String predictionplayer;
 	
 	public static  HashMap<Integer, String> hmaprecord=new HashMap<Integer, String>();
 	public static HashMap<Integer, String> hmaprecord2=new HashMap<Integer, String>();
@@ -15,11 +16,13 @@ public class Driver {
 	{
 		
 		
+		
 		PlayerRecord pr=new PlayerRecord();
 		
-		
-			System.out.println("Ozlympic Game");
-			System.out.println("======================");
+			System.out.println("");
+			System.out.println("");
+			System.out.println("INSTRUCTIONS BELOW: Press the options to proceed");
+			System.out.println(" ");
 			System.out.println("1.	Select a game to run");
 			System.out.println("2.	Predict	the winner of the game ");
 			System.out.println("3.	Start the game");
@@ -38,19 +41,20 @@ public class Driver {
 			
 				case 1: 
 					
-					selectgame();
+					gameselect();
 				
 					break;
 				case 2:
 					System.out.println("Predict	the winner of the game");
+					prediction();
 					break;
 				case 3:
 					System.out.println("Start the game");
+					startgame();
 					break;
 				case 4:
 					System.out.println("Display	the final results of all games");
-					
-					pr.ttdisplay();	
+					pr.gameResultDisplay();	
 					break;
 				case 5:
 					System.out.println("Display	the points of all athletes");
@@ -65,7 +69,7 @@ public class Driver {
 						}
 						if(n2==db.getAthletedetails()[i].getName()){
 							int x= db.getAthletedetails()[i].getpoints();
-							x=db.getAthletedetails()[i].getpoints()+3;
+							x=db.getAthletedetails()[i].getpoints()+2;
 							db.getAthletedetails()[i].setAthletepoints(x);
 							
 						}
@@ -90,138 +94,125 @@ public class Driver {
 			}
 			}
 			
+	public void gameselect(){
 	
-	
-	public static void selectgame(){
-		Random ran=new Random();
-		Database db=new Database();
-		PlayerRecord play=new PlayerRecord();
-		 
-		
-
-		System.out.println("Enter the no of participants for the Game");
-		Scanner sc2 = new Scanner(System.in);
-		int option2=sc2.nextInt();
-		
 		System.out.println(" Please select the type of game you would like to play");
 		System.out.println("1. Running");
 		System.out.println("2. Swimming");
 		System.out.println("3. Cycling");
-		char typeathlete;
 		
 		Scanner sc3= new Scanner(System.in);
 		int option3 = sc3.nextInt();
-		play.listmake();
-		hmaprecord=play.getHmaprecord();
-	
-			switch(option3)
-			{
-			case 1:
-			//Running game
-				
-				
-				 typeathlete = 'R';
+		
+		switch(option3){
+		case 1:
 			
-				System.out.println("The Running Game has been selected");
-				if(option2 >= 4)
+			System.out.println("Your selection: EVENT RUNNING");
+			System.out.println("");
+			System.out.println("You will be redirected to the MAIN MENU for further proceedings");
+			gametype = 'R';
+			mainoption();
+			break;
+			
+		case 2:
+			
+			System.out.println("Your selection: EVENT SWIMMING");
+			System.out.println("");
+			System.out.println("You will be redirected to the MAIN MENU for purther proceedings");
+			gametype = 'S';
+			mainoption();
+			break;
+			
+		case 3:
+			
+			System.out.println("Your selection: EVENT CYCLING");
+			System.out.println("");
+			System.out.println("You will be redirected to the MAIN MENU for purther proceedings");
+			gametype = 'C';
+			mainoption();
+			break;
+		}
+		
+	}
+	
+	public void prediction(){
+		
+		if(gametype == 'R'){
+			System.out.println("GAME RUNNING");
+			System.out.println("------------------------------------");
+		}
+		else if(gametype == 'S'){
+			System.out.println("GAME SWIMMING");
+			System.out.println("------------------------------------");
+		}
+		else if(gametype == 'C'){
+			System.out.println("GAME CYCLING");
+			System.out.println("------------------------------------");
+		}
+		System.out.println("");
+		
+		System.out.println("PLease predict the WINNER ID from the following List of Players");
+		System.out.println("");
+		System.out.println("The LIST:");
+		
+		
+		db.athleteDisplay(gametype);
+		System.out.println("");
+		System.out.println("Enter the ID number");
+		
+		Scanner pre = new Scanner(System.in);
+		predictionplayer=pre.next();
+		
+		System.out.println("Thank you for the Prediction.");
+		System.out.println("You will be redirected to the MAIN MENU");
+		mainoption();
+		
+	}
+	
+
+	
+	public void startgame(){
+		Random ran=new Random();
+		Database db=new Database();
+		PlayerRecord play=new PlayerRecord();
+		 
+		System.out.println("The game is about to begn");
+		System.out.println("Enter the no of participants for the Game");
+		Scanner sc2 = new Scanner(System.in);
+		int option2=sc2.nextInt();
+		
+		if(option2<4){
+			System.out.println("PLease enter the number of participants more than 4");
+		}
+		else{
+			System.out.println("The Game begins");
+		
+			char typeathlete ;
+			play.listmake();
+			hmaprecord=play.getHmaprecord();
+			
+			
+			if(gametype=='R')
 				{
-					db.gameList=db.athleteLoad(typeathlete, option2);
+					typeathlete = 'R';
 					
+					db.gameList=db.athleteLoad(typeathlete, option2);
 					System.out.println("Gamesize" + db.gameList.size());
 					System.out.println("---------");
 					System.out.println("Game Starting...");
 					Running run = new Running();
-					
-					
-					
+	
 					int flag=0;
 					int flag2=0;
-					for(Athlete at:db.gameList){
-						if(flag2==0){
-						n1=at.getName();
-						flag2++;
-						}
-						else if(flag2==1 && flag2!=0){
-							n2=at.getName();
-							
-							flag2++;
-						}
-						else if(flag2==2 && flag!=0 && flag2!=1){
-							n3=at.getName();
-							flag2++;
-						}
-						if(flag==0){
-						at.compete(run.getMaxTime(),run.getMinTime());
-						flag++;
-					}
-					}
-}
-
-				
-				
-				play.tt(typeathlete,n1, n2, n3);
-				oz.main(null);
-				break;
-				
-			case 2:
-				//swimming
-				 typeathlete = 'S';
-				System.out.println("The Running Game has been selected");
-				if(option2 >= 4)
-				{
-					db.gameList=db.athleteLoad(typeathlete, option2);
-					System.out.println("Gamesize" + db.gameList.size());
-					System.out.println("---------");
 					
-					Swimming run = new Swimming();
-					int flag=0;
-					int flag2=0;
-					for(Athlete at:db.gameList){
-						if(flag2==0){
-						n1=at.getName();
-						flag2++;
-						}
-						else if(flag2==1 && flag!=0){
-							n2=at.getName();
-							flag2++;
-						}
-						else if(flag2==2 && flag!=0 && flag2!=1){
-							n3=at.getName();
-							flag2++;
-						}
-						if(flag==0){
-						at.compete(run.getMaxTime(),run.getMinTime());
-						flag++;
-					}
-					}
-					
-				}
-				
-				play.tt(typeathlete,n1, n2, n3);
-				break;
-				
-			case 3:
-				//cycling
-				 typeathlete = 'C';
-					System.out.println("The Running Game has been selected");
-					
-					
-					if(option2 >= 4)
-					{
-						db.gameList=db.athleteLoad(typeathlete, option2);
-						System.out.println("Gamesize" + db.gameList.size());
-						System.out.println("---------");
-						
-						Cycling run = new Cycling();
-						int flag=0;
-						int flag2=0;
 						for(Athlete at:db.gameList){
 							if(flag2==0){
 							n1=at.getName();
 							flag2++;
 							}
-							else if(flag2==1 && flag!=0){
+							else if(flag2==1 && flag2!=0){
 								n2=at.getName();
+								
 								flag2++;
 							}
 							else if(flag2==2 && flag!=0 && flag2!=1){
@@ -231,23 +222,83 @@ public class Driver {
 							if(flag==0){
 							at.compete(run.getMaxTime(),run.getMinTime());
 							flag++;
-						}
-						}
+							}
+							}
 						
-					}
+						play.tt(typeathlete,n1, n2, n3);
+						mainoption();
+						}
 					
-					play.tt(typeathlete,n1, n2, n3);
-					break;
-			default:
-				System.out.println("Please enter a valid number");
-			}
-			oz.main(null);
-			
-		}
+
+			if(gametype == 'S')
+			{
+					typeathlete = 'R';
+					db.gameList=db.athleteLoad(typeathlete, option2);
+					System.out.println("Gamesize" + db.gameList.size());
+					System.out.println("---------");
+					System.out.println("Game Starting...");
+					Running run = new Running();
 		
+					int flag=0;
+					int flag2=0;
+					
+						for(Athlete at:db.gameList){
+							if(flag2==0){
+							n1=at.getName();
+							flag2++;
+							}
+							else if(flag2==1 && flag2!=0){
+								n2=at.getName();
+								
+								flag2++;
+							}
+							else if(flag2==2 && flag!=0 && flag2!=1){
+								n3=at.getName();
+								flag2++;
+							}
+							if(flag==0){
+							at.compete(run.getMaxTime(),run.getMinTime());
+							flag++;
+							}
+							}
+						play.tt(typeathlete,n1, n2, n3);
+						mainoption();
+						}
+					
+				if(gametype=='C')
+				{
+					typeathlete = 'R';
+					db.gameList=db.athleteLoad(typeathlete, option2);
+					System.out.println("Gamesize" + db.gameList.size());
+					System.out.println("---------");
+					System.out.println("Game Starting...");
+					Running run = new Running();
+		
+					int flag=0;
+					int flag2=0;
+					
+						for(Athlete at:db.gameList){
+							if(flag2==0){
+							n1=at.getName();
+							flag2++;
+							}
+							else if(flag2==1 && flag2!=0){
+								n2=at.getName();
+								
+								flag2++;
+							}
+							else if(flag2==2 && flag!=0 && flag2!=1){
+								n3=at.getName();
+								flag2++;
+							}
+							if(flag==0){
+							at.compete(run.getMaxTime(),run.getMinTime());
+							flag++;
+							}
+							}
+						play.tt(typeathlete,n1, n2, n3);
+						mainoption();
+				}
+		}
 	}
-	
-
-
-
-
+}

@@ -12,7 +12,7 @@ public class Athlete    {
 	private String athletestate;
 	private char athletetype;
 	Set<Athlete> athleteList;
-	Athlete currentAthlete;
+	Athlete athlete;
 	private int athletepoints;
 	
 	public String getID(){
@@ -94,10 +94,10 @@ for(int i=0;i<=db.gameList.size();i++)
 System.out.println("Output Sorted");
 Iterator it = db.gameList.iterator();
 while(it.hasNext()){
-currentAthlete = (Athlete)it.next();
+athlete = (Athlete)it.next();
 a++;
 System.out.print("The Current Players are"+ "");
-System.out.print(currentAthlete.getID()+ "-     ");
+System.out.print(athlete.getID()+ "-     ");
 System.out.println(time[a]);
 }
 

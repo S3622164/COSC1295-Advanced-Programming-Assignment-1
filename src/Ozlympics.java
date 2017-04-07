@@ -6,6 +6,12 @@ public class Ozlympics {
 
 		Driver dr = new Driver();
 		
+		System.out.println("**********************************************");
+		System.out.println("*                                            *");
+		System.out.println("*         WELCOME TO OZLYMPICS GAME          *");
+		System.out.println("*                                            *");
+		System.out.println("**********************************************");
+		
 dr.mainoption();
 
 	}

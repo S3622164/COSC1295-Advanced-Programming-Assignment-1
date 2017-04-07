@@ -55,8 +55,6 @@ public class Database {
 		athletedetails[38]=new Athlete("ID39","Carrie",22,"Cochin",'A',0);
 		athletedetails[39]=new Athlete("ID40","Rox",22,"Cochin",'A',0); 
 		
-		
-		
 	}
 	
 	public Athlete[] getAthletedetails() {
@@ -75,15 +73,47 @@ public class Database {
 		return currentAthlete;
 	}
 
-	public void athleteDisplay(int number, char theathtype)
+	public void athleteDisplay(char gametype)
 	{
-
-		for(int i=0;i<number;i++)
+		if(gametype == 'R')
 		{
-			Random r=new Random();
-			int rand=r.nextInt(((39-4)+1)+4);
-//		
+			for(int i=0;i<athletedetails.length;i++)
+				{
+					if(athletedetails[i].gettype() == 'R' || athletedetails[i].gettype() == 'A')
+						{
+						System.out.print("Athlete ID:"+athletedetails[i].getID() +" Athlete Name: "+ athletedetails[i].getName());
+						System.out.print(" Age: "+ athletedetails[i].getAge()+ " State: "+ athletedetails[i].getState());
+						System.out.println(" Type: " + athletedetails[i].gettype());
+						}
+				}
 		}
+		
+		if(gametype == 'S')
+		{
+			for(int i=0;i<athletedetails.length;i++)
+				{
+					if(athletedetails[i].gettype() == 'S' || athletedetails[i].gettype() == 'A')
+						{
+						System.out.print("Athlete ID:"+athletedetails[i].getID() +" Athlete Name: "+ athletedetails[i].getName());
+						System.out.print(" Age: "+ athletedetails[i].getAge()+ " State: "+ athletedetails[i].getState());
+						System.out.println(" Type: " + athletedetails[i].gettype());
+						}
+				}
+		}
+		
+		if(gametype == 'C')
+		{
+			for(int i=0;i<athletedetails.length;i++)
+				{
+					if(athletedetails[i].gettype() == 'C' || athletedetails[i].gettype() == 'A')
+						{
+						System.out.print("Athlete ID:"+athletedetails[i].getID() +" Athlete Name: "+ athletedetails[i].getName());
+						System.out.print(" Age: "+ athletedetails[i].getAge()+ " State: "+ athletedetails[i].getState());
+						System.out.println(" Type: " + athletedetails[i].gettype());
+						}
+				}
+		}
+		
 	}
 	
 	@SuppressWarnings("null")

@@ -8,6 +8,8 @@ import java.util.TreeMap;
 
 
 public class PlayerRecord {
+	
+	Driver dr =new Driver();
 	public static HashMap<Integer, String> getHmaprecord() {
 		return hmaprecord;
 	}
@@ -52,16 +54,43 @@ public class PlayerRecord {
 		
 	}
 	
-	public void ttdisplay()
+	public void gameResultDisplay()
 	{
-		System.out.println("The Final Results for the Games are:");
 		
+		System.out.println("THE FINAL RECORD OF GAMES:");
+		System.out.println("------------------------------------------");
+		int a=1;
+	//	int flag=0;
 				Iterator i=hmap.keySet().iterator();
+				
 				while(i.hasNext()){
 					char key=(Character) i.next();
 					String[] value= hmap.get(key);
-					System.out.println(key+"......"+value[0]+"....."+value[1]+"....."+value[2]);
-				}		
+					System.out.println(a + ")" + key+" The 1st Place "+value[0]+" The 2nd Place"+value[1]+" The 3rd Place"+value[2]);
+//				if(value[0] == dr.predictionplayer)
+//				{
+//					flag =1;
+//				}
+				}	
+				
+//				if(flag==1)
+//				{
+//					System.out.println("CONGRAGULATIONS");
+//					System.out.println(""    );
+//					System.out.println("YOU WON THE PREDICTION");
+//				}
+//				else{
+//					System.out.println("");
+//					System.out.println("BETTER LUCK NEXT TIME. THANK YOU");
+//					System.out.println("");
+//					
+//				}
+//				
+				System.out.println("");
+				System.out.println("");
+				System.out.println("***************************");
+				System.out.println("*        THE END          *");
+				System.out.println("***************************");
 
 	}
 				
@@ -90,10 +119,5 @@ public class PlayerRecord {
 	public String getOfficial() {
 		return Official;
 	}
-	
-//	public void PlayerReocrdDisplay(){
-//		
-//		for(String[] s: hmap.values())
-//	}
 	
 }
