@@ -1,9 +1,15 @@
+/*
+ * @ Seby Tom Sebastian
+ */
+
+// Class Inherited to gameItem
+
 public class Running extends gameItem {
 	
 private	int minTime = 10;
 private int maxTime = 20;
 
-
+// Constructor
 
 	public Running() {
 		super();

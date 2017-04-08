@@ -1,3 +1,9 @@
+/*
+ * @ Harmanak Singh
+ */
+
+// Class Inherited to gameItem
+
 public class Swimming extends gameItem {
 	
 	private int minTime = 100;

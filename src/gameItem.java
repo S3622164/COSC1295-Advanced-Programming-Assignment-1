@@ -1,15 +1,14 @@
+/*
+ * @ Seby Tom Sebastian
+ */
 
-public abstract class gameItem {
+// Abstract Class
+public abstract class gameItem implements game{
 
 	
 	private int minTime;
 	private int maxTime;
-	
-//	public gameItem(int min,int max)
-//	{
-//		minTime=min;
-//		maxTime=max;
-//	}
+
 	
 	public gameItem() {
 		// TODO Auto-generated constructor stub
